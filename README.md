@@ -1,0 +1,1 @@
+# This is a simple Quantum Computer Simulator written on python. Most of the stuff is made in correspondence with Kaiser and Granade book.

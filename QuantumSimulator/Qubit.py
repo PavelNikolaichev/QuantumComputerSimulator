@@ -10,6 +10,13 @@ class Qubit(metaclass=ABCMeta):
         pass
 
     @abstractmethod
+    def x(self):
+        """
+        Transforms qubit using the Hardmard operation np.array([[1, 1], [1, -1]]) / np.sqrt(2)
+        """
+        pass
+
+    @abstractmethod
     def measure(self) -> bool:
         """
         Measure qubit. In other words, extract data from it.

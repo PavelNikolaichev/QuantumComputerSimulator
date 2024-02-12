@@ -14,6 +14,11 @@ H = np.array([
     [1, -1]
 ], dtype=complex) / np.sqrt(2)
 
+X = np.array([
+    [0, 1],
+    [1, 0]
+], dtype=complex) / np.sqrt(2)
+
 class SingleQubitSimulator(QuantumDevice):
     def __init__(self):
         pass
@@ -33,6 +38,9 @@ class SimulatedQubit(Qubit):
 
     def h(self):
         self.state = H @ self.state
+
+    def x(self):
+        self.state = X @ self.state
 
     def measure(self) -> bool:
         prob_0 = np.abs(self.state[0, 0]) ** 2
