@@ -1,4 +1,3 @@
-import abc
 from abc import ABCMeta, abstractmethod
 from contextlib import contextmanager
 from QuantumSimulator.Qubit import Qubit
@@ -10,12 +9,14 @@ class QuantumDevice(metaclass=ABCMeta):
         Allocate a qubit from the device.
         """
         pass
+    
     @abstractmethod
     def deallocate_qubit(self, qubit: Qubit):
         """
         Deallocate a qubit from the device.
         """
         pass
+
     @contextmanager
     def using_qubit(self):
         """
@@ -29,3 +30,14 @@ class QuantumDevice(metaclass=ABCMeta):
             qubit.reset()
 
         self.deallocate_qubit(qubit)
+
+    @contextmanager
+    def using_register(self, n_qubits=1):
+        qubits = [self.allocate_qubit() for idx in range(n_qubits)]
+
+        try:
+            yield qubits
+        finally:
+            for qubit in qubits:
+                qubit.reset()
+                self.deallocate_qubit(qubit)
